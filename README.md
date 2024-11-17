@@ -1,50 +1,83 @@
-# ChatBot Chain
+# Implementation of a Contextual Chatbot in PyTorch.  
+Simple chatbot implementation with PyTorch. 
 
-## Описание
-ChatBot Chain — это интерактивный чат-бот, разработанный с использованием нейросетевых технологий. Он предназначен для предоставления информации и развлечения.
+- The implementation should be easy to follow for beginners and provide a basic understanding of chatbots.
+- The implementation is straightforward with a Feed Forward Neural net with 2 hidden layers.
+- Customization for your own use case is super easy. Just modify `intents.json` with possible patterns and responses and re-run the training (see below for more info).
 
-## Функциональные возможности
-- **Ответы на вопросы**: Бот может отвечать на часто задаваемые вопросы.
-- **Взаимодействие**: Поддерживает естественный диалог с пользователями.
-- **Поддерживает хорошее настроение**: Предлагает рекомендации на основе запросов пользователя.
-- **Может пошутить**: Бот знает несколько шуток и может их использвоать в контексте.
+The approach is inspired by this article and ported to PyTorch: [https://chatbotsmagazine.com/contextual-chat-bots-with-tensorflow-4391749d0077](https://chatbotsmagazine.com/contextual-chat-bots-with-tensorflow-4391749d0077).
 
-## Технологии
-- **Язык программирования**: Python
-- **Библиотеки**:
-  - [Pytorch)
-  - [nltk)
-  - [NeuralNet]
-  - [ruBert]
-  - [Mistral-ru]
+## Watch the Tutorial
+[![Alt text](https://img.youtube.com/vi/RpWeNzfSUHw/hqdefault.jpg)](https://www.youtube.com/watch?v=RpWeNzfSUHw&list=PLqnslRFeH2UrFW4AUgn-eY37qOAWQpJyg)
 
-## Установка
-Чтобы запустить проект на локальной машине, выполните следующие шаги:
+## Installation
 
-Склонируйте репозиторий:
-     git clone ...
-     
-Установите зависимости:
-pip install -r requirements.txt
+### Create an environment
+Whatever you prefer (e.g. `conda` or `venv`)
+```console
+mkdir myproject
+$ cd myproject
+$ python3 -m venv venv
+```
 
-Запустите приложение:
-python app.py
+### Activate it
+Mac / Linux:
+```console
+. venv/bin/activate
+```
+Windows:
+```console
+venv\Scripts\activate
+```
+### Install PyTorch and dependencies
 
-Откройте браузер и перейдите по адресу http://localhost:5000.
+For Installation of PyTorch see [official website](https://pytorch.org/).
 
-Использование
-Для начала общения с ботом просто введите сообщение в текстовое поле и нажмите "Отправить".
-Чтобы выйти из чата, введите "выход".
+You also need `nltk`:
+ ```console
+pip install nltk
+ ```
 
-Примеры
-Вопрос: Привет, как живешь?
-Ответ: Живу как в сказке: не вижу ни сыра ни колбаски)
+If you get an error during the first run, you also need to install `nltk.tokenize.punkt`:
+Run this once in your terminal:
+ ```console
+$ python
+>>> import nltk
+>>> nltk.download('punkt')
+```
 
-Вклад
-Если вы хотите внести свой вклад в проект, пожалуйста, создайте форк репозитория и отправьте пулл-реквест с вашими изменениями.
-
-Лицензия
-Этот проект лицензирован под [MIT License] (полная свобода использовать мой код любым способом)
-
-Контакты
-Если у вас есть вопросы или предложения, вы можете связаться со мной     
+## Usage
+Run
+```console
+python train.py
+```
+This will dump `data.pth` file. And then run
+```console
+python chat.py
+```
+## Customize
+Have a look at [intents.json](intents.json). You can customize it according to your own use case. Just define a new `tag`, possible `patterns`, and possible `responses` for the chat bot. You have to re-run the training whenever this file is modified.
+```console
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hi",
+        "Hey",
+        "How are you",
+        "Is anyone there?",
+        "Hello",
+        "Good day"
+      ],
+      "responses": [
+        "Hey :-)",
+        "Hello, thanks for visiting",
+        "Hi there, what can I do for you?",
+        "Hi there, how can I help?"
+      ]
+    },
+    ...
+  ]
+}
+```

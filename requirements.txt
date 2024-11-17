@@ -1,7 +1,0 @@
-langchain
-chainlit
-langchain_community
-ollama
-transformers
-torch
-accelerate
